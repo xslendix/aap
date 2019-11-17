@@ -6,7 +6,35 @@
 		<item name="colorControlHighlight">@color/colorControlHighlight</item>
 		<item name="colorControlNormal">@color/colorControlNormal</item>
         <item name="android:textColor">@color/textColor</item>
+        <item name="android:windowBackground">@color/colorBg</item>
+        <item name="android:colorBackground">@color/colorBg</item>
+        <item name="android:itemBackground">@color/colorBg</item>
 	</style>
+    
+    <style name="strawberry" parent="Theme">
+        <item name="colorPrimary">@color/colorPrimaryStrawberry</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkStrawberry</item>
+        <item name="colorAccent">@color/colorAccentStrawberry</item>
+        <item name="colorControlHighlight">@color/colorControlHighlightStrawberry</item>
+        <item name="colorControlNormal">@color/colorControlNormalStrawberry</item>
+        <item name="android:textColor">@color/textColorStrawberry</item>
+        <item name="android:windowBackground">@color/colorBgStrawberry</item>
+        <item name="android:colorBackground">@color/colorBgStrawberry</item>
+        <item name="android:itemBackground">@color/colorBgStrawberry</item>
+    </style>
+
+    <style name="light" parent="Theme">
+        <item name="colorPrimary">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkLight</item>
+        <item name="colorAccent">@color/colorAccentLight</item>
+        <item name="colorControlHighlight">@color/colorControlHighlightLight</item>
+        <item name="colorControlNormal">@color/colorControlNormalLight</item>
+        <item name="android:textColor">@color/textColorLight</item>
+        <item name="android:windowBackground">@color/colorBgLight</item>
+        <item name="android:colorBackground">@color/colorBgLight</item>
+        <item name="android:itemBackground">@color/colorBgLight</item>
+	</style>
+    
 	<style name="Theme.FullScreen" parent="Theme">
 		<item name="android:windowFullscreen">true</item>
 		<item name="android:windowContentOverlay">@null</item>

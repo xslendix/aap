@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.Context;
+import android.preference.PreferenceManager;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -43,7 +46,9 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
 
     private AlertDialog.Builder dialog;
-
+    
+    //SharedPreferences sharedPref = getSharedPreferences("synced", Context.MODE_PRIVATE);
+    
     // Menu
     @Override
     public boolean onCreateOptionsMenu (Menu menu)
@@ -69,9 +74,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
+        String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
+        setTheme(getTheme(theme));
+        //setTheme(R.style.strawberry);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        
         initializeView();
         requestPermission();
 		recycleView();
@@ -181,4 +189,12 @@ public class MainActivity extends AppCompatActivity
             handler.postDelayed(refreshers, 100000);
 		}
 	};
+    
+    private int getTheme(String name) {
+        switch (name) {
+            case "Strawberry": return R.style.strawberry;
+            case "Light": return R.style.light;
+            default: return R.style.Theme;
+        }
+    }
 }

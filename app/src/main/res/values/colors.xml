@@ -4,9 +4,36 @@
 	<color	name="colorAccent">#3F51B5</color>
 	<color	name="colorControlHighlight">#E8EAF6</color>
 	<color	name="colorControlNormal">#3F51B5</color>
+    <color name="colorBg">#292929</color>
     <color name="textColor">#fefefe</color>
     <color name="lineEditColor">#fefefe</color>
     <color name="lineEditBgColor">#505050</color>
     <color name="editorBgColor">#202020</color>
     <color name="editorCodeColor">#fefefe</color>
-</resources>
+    
+    <color  name="colorPrimaryStrawberry">#E91E63</color>
+    <color  name="colorPrimaryDarkStrawberry">#C2185B</color>
+    <color  name="colorAccentStrawberry">#E91E63</color>
+    <color  name="colorControlHighlightStrawberry">#FCE4EC</color>
+    <color  name="colorControlNormalStrawberry">#E91E63</color>
+    <color name="colorBgStrawberry">#FFEBEE</color>
+    <color name="textColorStrawberry">#212121</color>
+    <color name="lineEditColorStrawberry">#FCE4EC</color>
+    <color name="lineEditBgColorStrawberry">#F48FB1</color>
+    <color name="editorBgColorStrawberry">#FCE4EC</color>
+    <color name="editorCodeColorStrawberry">#212121</color>
+
+
+    <color  name="colorPrimaryLight">#3F51B5</color>
+    <color  name="colorPrimaryDarkLight">#283593</color>
+    <color  name="colorAccentLight">#3F51B5</color>
+    <color  name="colorControlHighlightLight">#E8EAF6</color>
+    <color  name="colorControlNormalLight">#3F51B5</color>
+    <color name="colorBgLight">#ffffff</color>
+    <color name="textColorLight">#212121</color>
+    <color name="lineEditColorLight">#213121</color>
+    <color name="lineEditBgColorLight">#e8e8e8</color>
+    <color name="editorBgColorLight">#ffffff</color>
+    <color name="editorCodeColorLight">#212121</color>
+    
+    </resources>
