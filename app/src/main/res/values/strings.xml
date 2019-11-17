@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AAPxIDE</string>
+    <string name="hello_world">Hello, World!</string>
+	<string name="project_manager">Project Manager</string>
+	<string name="text_editor">Text Editor</string>
+	<string name="project_options">Project Options</string>
+	<string name="project_options_desc">Choose an option for project </string>
+	<string name="ok">Ok</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	<string name="delete">Delete</string>
+	<string name="backup">Backup</string>
+	<string name="compile">Compile</string>
+	<string name="about">About</string>
+	<string name="settings">Settings</string>
+	
+</resources>
