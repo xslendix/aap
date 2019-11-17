@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
 
     FileUtil fu = new FileUtil();
     PathUtil pu = new PathUtil();
-    
+
     private CoordinatorLayout cl;
 
     private Toolbar toolbar;
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
     private void vxlosh ()
     {
         cl = findViewById(R.id.cl);
-      Snackbar.make(cl, "Test", Snackbar.LENGTH_INDEFINITE).show();
+        Snackbar.make(cl, "Test", Snackbar.LENGTH_INDEFINITE).show();
     }
 
     private void initializeView ()
@@ -89,8 +89,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public boolean onItemLongClick (AdapterView<?> param1, View param2, int index, long param4)
                 {
-                    dialog.setMessage("Choose an option for project \"" + (projects.get(index).get("title").toString()) + "\".");
-
+                    dialog.setMessage(getString(R.string.project_options_desc) + " \"" + (projects.get(index).get("title").toString()) + "\".");
                     dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick (DialogInterface dialog, int which)
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity
         projects.add(tmp);
         lv1.setAdapter(new LV1Adapter(projects));
     }
-    
+
     private void initializeCode ()
     {
         /*
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity
             loadProjects();
         }
     }
-    
+
     @Override
     public void onRequestPermissionsResult (int requestCode, String[] permissions, int[] grantResults)
     {
@@ -200,7 +199,7 @@ public class MainActivity extends AppCompatActivity
         public View getView (int index, View view, ViewGroup vg)
         {
             LayoutInflater lf = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            
+
             View v = view;
             if (v == null)
             {
