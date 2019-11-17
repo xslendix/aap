@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/cl">
-
+    
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
             app:title="@string/app_name"
 			app:subtitle="@string/project_manager"
             app:popupTheme="@style/Theme.PopupOverlay"/>
-
+        
     </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
@@ -35,14 +35,12 @@
             android:id="@+id/SwipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <ListView
-                android:id="@+id/listview1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-				android:choiceMode="none" >
-            </ListView>
-
+            
+			<androidx.recyclerview.widget.RecyclerView
+				android:id="@+id/recyclerview"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"/>
+			
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
@@ -52,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_gravity="right|bottom"
-
+		
         app:srcCompat="@drawable/baseline_add_white_24"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

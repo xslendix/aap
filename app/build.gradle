@@ -8,7 +8,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
-        versionName "0.1.1" // Release.Major.Minor.Patch - patch bug fixes, minor feature added or removed that doest break compatibility, major breaks compatibility, release
+        versionName "1.0.0"
     }
     buildTypes {
         release {

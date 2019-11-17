@@ -2,45 +2,42 @@ package br.verumapps.aapide.ui;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.os.Handler;
 import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import br.verumapps.aapide.R;
 import br.verumapps.utils.FileUtil;
 import br.verumapps.utils.PathUtil;
 import com.google.android.material.snackbar.Snackbar;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
 
+	/*
+	
+    OnClick RecycleView is in RecycleviewAdapter
+	
+	*/
     FileUtil fu = new FileUtil();
     PathUtil pu = new PathUtil();
-
+    Handler handler = new Handler();
+	
     private CoordinatorLayout cl;
 
     private Toolbar toolbar;
 
-    private ListView lv1;
-
-    private ArrayList<HashMap<String, Object>> projects = new ArrayList<>();
     private AlertDialog.Builder dialog;
 
     @Override
@@ -54,165 +51,113 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+		
         initializeView();
-        initializeCode();
-        vxlosh();
+        requestPermission();
+		recycleView();
+		handler.post(refreshers);
+		
     }
+	private SwipeRefreshLayout swipeRefreshLayout;
+	private RecyclerView recyclerView;
+	private RecyclerviewAdapter recyclerviewAdapter;
+	private List<User> userList;
+	
+private void recycleView(){
+	userList = new ArrayList<>();
+	swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.SwipeRefreshLayout);
+	swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_light);
+	swipeRefreshLayout.setOnRefreshListener(refreshListener);
 
-    private void vxlosh ()
-    {
-        cl = findViewById(R.id.cl);
-        Snackbar.make(cl, "Test", Snackbar.LENGTH_INDEFINITE).show();
-    }
+	recyclerView = (RecyclerView)findViewById(R.id.recyclerview);
+	recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+	recyclerviewAdapter = new RecyclerviewAdapter();
+	recyclerView.setAdapter(recyclerviewAdapter);
+	
+	
+}
+	private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+
+		@Override
+		public void onRefresh() {
+			swipeRefreshLayout.setRefreshing(true);
+			loadProjects();
+			swipeRefreshLayout.setRefreshing(false);
+		}
+	};
+
+	
     private void initializeView ()
     {
-        lv1 = findViewById(R.id.listview1);
-
+        
         dialog = new AlertDialog.Builder(this);
 
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.menu);
 
-        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick (AdapterView<?> param1, View param2, int index, long param4)
-                {
-                    Intent i = new Intent();
-                    i.setClass(getBaseContext(), TextEditorActivity.class);
-                    startActivity(i);
-                }
-            });
-
-        lv1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                @Override
-                public boolean onItemLongClick (AdapterView<?> param1, View param2, int index, long param4)
-                {
-                    dialog.setMessage(getString(R.string.project_options_desc) + " \"" + (projects.get(index).get("title").toString()) + "\".");
-                    dialog.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick (DialogInterface dialog, int which)
-                            {
-
-                            }
-                        });
-
-                    dialog.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick (DialogInterface dialog, int which)
-                            {
-
-                            }
-                        });
-
-                    dialog.setNeutralButton("-_-", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick (DialogInterface dialog, int which)
-                            {
-
-                            }
-                        });
-
-                    dialog.create().show();
-
-                    return true;
-                }
-            });
+        
     }
-
+    String path = FileUtil.getExternalStorageDir() + pu.defaultPath;
     private void loadProjects ()
     {
-        HashMap<String, Object> tmp = new HashMap<>();
-        tmp.put("title", "Bruh Moment");
-        tmp.put("desc", "Bruh Moment is best app");
-        tmp.put("pkgname", "com.bruh.moment");
-        tmp.put("projectname", "BruhMoment");
+		cl = findViewById(R.id.cl);
+		
+		try{
+			userList = new ArrayList<>();
+			User user;
+			File dir = new File(path);
+			if (!dir.exists() || dir.isFile()) return;
 
-        projects.add(tmp);
-        lv1.setAdapter(new LV1Adapter(projects));
+			File[] listFiles = dir.listFiles();
+			if (listFiles == null || listFiles.length <= 0) return;
+
+
+			for (File file : listFiles)
+			{
+				if(pu.ifIsAndroidProject(file.getAbsolutePath())){
+                   
+					user = new User(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("/")+1),file.getAbsolutePath(),"");
+					userList.add(user);
+				}
+			}
+			recyclerviewAdapter.setUserList(userList);
+		}catch(Exception e){
+			Snackbar.make(cl, e.getMessage(), Snackbar.LENGTH_INDEFINITE).show();
+		}
+		
     }
-
-    private void initializeCode ()
+    
+    private void requestPermission ()
     {
-        /*
-         HashMap<String, Object> tmp = new HashMap<>();
-         tmp.put("title", "Bruh Moment");
-         tmp.put("desc", "Bruh Moment is best app");
-         tmp.put("pkgname", "com.bruh.moment");
-         tmp.put("projectname", "BruhMoment");
-
-         projects.add(tmp);
-         */
-        lv1.setAdapter(new LV1Adapter(projects));
+       
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED
             || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
         {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
         }
-        else
-        {
-            //initializeLogic();
-            loadProjects();
-        }
+        
     }
-
+    
     @Override
     public void onRequestPermissionsResult (int requestCode, String[] permissions, int[] grantResults)
     {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 1000)
         {
-            //initializeLogic();
-            loadProjects();
         }
-    }
+    }private Runnable refreshers = new Runnable() {
 
-    private class LV1Adapter extends BaseAdapter
-    {
-        ArrayList<HashMap<String, Object>> data;
+		@Override
+		public void run() {
+			swipeRefreshLayout.setRefreshing(true);
+			loadProjects();
+			swipeRefreshLayout.setRefreshing(false);
+			
+		 handler.postDelayed(refreshers, 100000);
+		}
+	};
 
-        public LV1Adapter (ArrayList<HashMap<String, Object>> arr)
-        {
-            data = arr;
-        }
-
-        @Override
-        public int getCount ()
-        {
-            return data.size();
-        }
-
-        @Override
-        public HashMap<String, Object> getItem (int index)
-        {
-            return data.get(index);
-        }
-
-        @Override
-        public long getItemId (int index)
-        {
-            return index;
-        }
-
-        @Override
-        public View getView (int index, View view, ViewGroup vg)
-        {
-            LayoutInflater lf = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View v = view;
-            if (v == null)
-            {
-                v = lf.inflate(R.layout.layout_project, null);
-            }
-
-            final ImageView icon = v.findViewById(R.id.icon);
-            final TextView title = v.findViewById(R.id.title);
-            final TextView desc = v.findViewById(R.id.description);
-
-            title.setText(data.get(index).get("title").toString());
-            desc.setText(data.get(index).get("desc").toString());
-            return v;
-        }
-    }
+    
 }

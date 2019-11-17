@@ -8,7 +8,7 @@ public class PathUtil
 
     public  boolean ifIsAndroidProject (String path)
     {
-        if (path.contains("/app"))
+        if (true)
         {
             File dir = new File(path + "/app");
 
@@ -19,7 +19,7 @@ public class PathUtil
 
             for (File file : listFiles)
             {
-                if (file.getAbsolutePath().contains("/src"))
+                if (file.getAbsolutePath().contains("src"))
                 {
                     return true;
                 }
