@@ -14,16 +14,19 @@ import android.content.ContentUris;
 import androidx.core.content.res.ResourcesCompat;
 import android.view.ViewStructure;
 
-public class CustomEditText extends EditText {
+public class CustomEditText extends EditText
+{
+
     private Rect rect;
     private Paint paint;
     private Paint paint2;
 
     private Context ctx;
 
-    public CustomEditText(Context context, AttributeSet attrs) {
+    public CustomEditText (Context context, AttributeSet attrs)
+    {
         super(context, attrs);
-        ctx=context;
+        ctx = context;
         rect = new Rect();
         paint = new Paint();
         paint.setStyle(Paint.Style.FILL);
@@ -36,25 +39,29 @@ public class CustomEditText extends EditText {
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw (Canvas canvas)
+    {
         int nr = 0;
         int n = getLineCount();
-        while (n!=0) {
+
+        while (n != 0)
+        {
             nr++;
-            n=n/10;
+            n = n / 10;
         }
+
         int baseline = getBaseline();
 
-        canvas.drawRect(rect.left,0,40*nr+4, 346744, paint2);
+        canvas.drawRect(rect.left, 0, 40 * nr + 4, 346744, paint2);
 
-        for (int i = 0; i < getLineCount(); i++) {
-            canvas.drawText("" + (i+1), rect.left+2, baseline, paint);
+        for (int i = 0; i < getLineCount(); i++)
+        {
+            canvas.drawText("" + (i + 1), rect.left + 2, baseline, paint);
             baseline += getLineHeight();
         }
 
-        this.setPadding(40*nr+4,0,0,0);
-
-
+        this.setPadding(40 * nr + 4, 0, 0, 0);
+        
         super.onDraw(canvas);
     }
 }
