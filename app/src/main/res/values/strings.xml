@@ -15,5 +15,7 @@
 	<string name="compile">Compile</string>
 	<string name="about">About</string>
 	<string name="settings">Settings</string>
+	<string name="replace">Replace with...</string>
+	<string name="search">Search...</string>
 	
 </resources>

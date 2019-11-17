@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
     private void vxlosh ()
     {
         cl = findViewById(R.id.cl);
-        Snackbar.make(cl, "Hi... I'm Velosh, I think...", Snackbar.LENGTH_INDEFINITE).show();
+      Snackbar.make(cl, "Test", Snackbar.LENGTH_INDEFINITE).show();
     }
 
     private void initializeView ()
@@ -73,13 +73,6 @@ public class MainActivity extends AppCompatActivity
 
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null)
-        {
-            getSupportActionBar().setTitle(getString(R.string.app_name));
-
-        }
-
-        toolbar.setSubtitle(getString(R.string.project_manager));
         toolbar.inflateMenu(R.menu.menu);
 
         lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {

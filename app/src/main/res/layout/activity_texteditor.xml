@@ -18,7 +18,8 @@
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/Theme.AppBarOverlay"
-            app:title="Project Manager"
+            app:title="@string/app_name"
+			app:subtitle="@string/text_editor"
             app:popupTheme="@style/Theme.PopupOverlay"/>
     </com.google.android.material.appbar.AppBarLayout>
 

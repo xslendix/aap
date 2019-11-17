@@ -19,7 +19,8 @@
             android:background="?attr/colorPrimary"
             android:elevation="4dp"
             android:theme="@style/Theme.AppBarOverlay"
-            app:title="Project Manager"
+            app:title="@string/app_name"
+			app:subtitle="@string/project_manager"
             app:popupTheme="@style/Theme.PopupOverlay"/>
         
     </com.google.android.material.appbar.AppBarLayout>
@@ -51,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_gravity="right|bottom"
+		
         app:srcCompat="@drawable/baseline_add_white_24"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
