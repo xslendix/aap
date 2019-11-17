@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
                 public boolean onItemLongClick (AdapterView<?> param1, View param2, int index, long param4)
                 {
                     dialog.setMessage(getString(R.string.project_options_desc) + " \"" + (projects.get(index).get("title").toString()) + "\".");
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    dialog.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick (DialogInterface dialog, int which)
                             {
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
                             }
                         });
 
-                    dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    dialog.setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick (DialogInterface dialog, int which)
                             {
