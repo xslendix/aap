@@ -30,12 +30,13 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-		<EditText
+		<br.verumapps.aapide.ui.views.CustomEditText
 			android:layout_width="match_parent"
 			android:inputType="textMultiLine"
 			android:layout_height="wrap_content"
 			android:ems="10"
-			android:layout_weight="1.0"/>
+			android:layout_weight="1.0"
+            android:gravity="top" />
 
 		<LinearLayout
 			android:orientation="horizontal"
