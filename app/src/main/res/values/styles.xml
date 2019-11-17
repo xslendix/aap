@@ -5,6 +5,7 @@
 		<item name="colorAccent">@color/colorAccent</item>
 		<item name="colorControlHighlight">@color/colorControlHighlight</item>
 		<item name="colorControlNormal">@color/colorControlNormal</item>
+        <item name="android:textColor">@color/textColor</item>
 	</style>
 	<style name="Theme.FullScreen" parent="Theme">
 		<item name="android:windowFullscreen">true</item>

@@ -41,6 +41,9 @@ public class CustomEditText extends EditText
     @Override
     protected void onDraw (Canvas canvas)
     {
+        this.setBackgroundColor(getResources().getColor(R.color.editorBgColor));
+        this.setTextColor(getResources().getColor(R.color.editorCodeColor));
+        
         int nr = 0;
         int n = getLineCount();
 

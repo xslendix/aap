@@ -6,7 +6,7 @@ public class PathUtil
 {
     public String defaultPath = "/.AAProjects/";
 
-    public  boolean ifIsAndroidProject (String path)
+    public  boolean isAndroidProject (String path)
     {
         if (true)
         {

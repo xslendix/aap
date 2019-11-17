@@ -23,6 +23,8 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import android.view.MenuItem;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -42,12 +44,28 @@ public class MainActivity extends AppCompatActivity
 
     private AlertDialog.Builder dialog;
 
+    // Menu
     @Override
     public boolean onCreateOptionsMenu (Menu menu)
     {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.openeditor:
+                Intent i = new Intent();
+                i.setClass(getBaseContext(), TextEditorActivity.class);
+                startActivity(i);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
@@ -117,7 +135,7 @@ public class MainActivity extends AppCompatActivity
 
 			for (File file : listFiles)
 			{
-				if (pu.ifIsAndroidProject(file.getAbsolutePath()))
+				if (pu.isAndroidProject(file.getAbsolutePath()))
                 {
 					user = new User(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("/") + 1), file.getAbsolutePath(), "");
 					userList.add(user);
@@ -150,6 +168,7 @@ public class MainActivity extends AppCompatActivity
         {
         }
     }
+    
     private Runnable refreshers = new Runnable() {
 
 		@Override

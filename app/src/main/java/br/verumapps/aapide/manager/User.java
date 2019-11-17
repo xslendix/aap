@@ -1,6 +1,6 @@
 package br.verumapps.aapide.manager;
 
-class User
+public class User
 {
     private String title;
     
