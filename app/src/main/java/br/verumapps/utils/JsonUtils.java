@@ -2,6 +2,7 @@ package br.verumapps.utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class JsonUtils
 {
@@ -15,7 +16,7 @@ public class JsonUtils
         catch (JSONException e)
         {
             e.printStackTrace();
-            return "Data (Json) null or not set";
+            return null;
         }
     }
 
@@ -58,6 +59,32 @@ public class JsonUtils
         {
             e.printStackTrace();
             return false;
+        }
+    }
+    
+    public static JSONArray getArray (String Json, String key)
+    {
+        try
+        {
+            JSONObject js = new JSONObject(Json);
+            return js.getJSONArray(key);
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static JSONObject getJSONObject (String Json, String key)
+    {
+        try
+        {
+            JSONObject js = new JSONObject(Json);
+            return js.getJSONObject(key);
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+            return null;
         }
     }
 }
