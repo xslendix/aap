@@ -32,6 +32,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import br.verumapps.utils.ThemeManager;
+import android.os.Build;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate (Bundle savedInstanceState)
     {
         String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
-        tm.setActivityTheme(theme);
+        //tm.setActivityTheme(theme);
         //setTheme(R.style.strawberry);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -139,8 +140,9 @@ public class MainActivity extends AppCompatActivity
     }
     private void createProjectDialog(){
         // will fix later
-	    // final AlertDialog dialogBuilder = new AlertDialog.Builder(getBaseContext(), tm.getDialogTheme(PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light"))).create();
-	    final AlertDialog dialogBuilder = new AlertDialog.Builder(this);
+	    //final AlertDialog dialogBuilder = new AlertDialog.Builder(getBaseContext(), tm.getDialogTheme(PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light"))).create();
+        //(ygor) fixed the AlertDialog builder for now, you forgot to add .create() to it
+	    final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
         
         LayoutInflater inflater = this.getLayoutInflater();
 	    View dialogView = inflater.inflate(R.layout.layout_create_project, null);
