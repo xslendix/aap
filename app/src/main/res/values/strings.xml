@@ -5,6 +5,7 @@
     <string name="hello_world">Hello, World!</string>
 	<string name="project_manager">Project Manager</string>
 	<string name="text_editor">Text Editor</string>
+    <string name="ui_editor">Layout Editor</string>
 	<string name="project_options">Project Options</string>
 	<string name="project_options_desc">Choose an option for project </string>
 	<string name="ok">Ok</string>

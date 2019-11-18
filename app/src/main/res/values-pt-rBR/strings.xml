@@ -5,6 +5,7 @@
     <string name="hello_world">Olá, mundo!</string>
     <string name="project_manager">Gerenciador de Projeto</string>
     <string name="text_editor">Editor de Texto</string>
+    <string name="ui_editor">Editor de Layout</string>
     <string name="project_options">Opções do Projeto</string>
     <string name="project_options_desc">Escolha uma opção para o projeto </string>
     <string name="ok">OK</string>
