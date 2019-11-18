@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -105,6 +106,7 @@ public class MainActivity extends AppCompatActivity
 
     private void recycleView ()
     {
+		
         userList = new ArrayList<>();
         swipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
         swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_light);
@@ -115,6 +117,10 @@ public class MainActivity extends AppCompatActivity
 
         recyclerviewAdapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(recyclerviewAdapter);
+		/*
+		recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+																 DividerItemDecoration.VERTICAL));
+		*/
     }
 	private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener()
     {
