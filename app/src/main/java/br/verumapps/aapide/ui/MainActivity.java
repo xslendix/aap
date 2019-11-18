@@ -2,6 +2,7 @@ package br.verumapps.aapide.ui;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,13 +29,12 @@ import br.verumapps.aapide.manager.User;
 import br.verumapps.aapide.ui.adapters.RecyclerViewAdapter;
 import br.verumapps.utils.FileUtil;
 import br.verumapps.utils.PathUtil;
+import br.verumapps.utils.ThemeManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import br.verumapps.utils.ThemeManager;
-import android.os.Build;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -197,6 +199,7 @@ public class MainActivity extends AppCompatActivity
         {
 			Snackbar.make(cl, e.getMessage(), Snackbar.LENGTH_INDEFINITE).show();
 		}
+		runLayoutAnimation(recyclerView);
 
     }
 
@@ -239,4 +242,13 @@ public class MainActivity extends AppCompatActivity
             default: return R.style.Theme;
         }
     }
+	private void runLayoutAnimation(final RecyclerView recyclerView) {
+		final Context context = recyclerView.getContext();
+		final LayoutAnimationController controller =
+            AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down);
+
+		recyclerView.setLayoutAnimation(controller);
+		recyclerView.getAdapter().notifyDataSetChanged();
+		recyclerView.scheduleLayoutAnimation();
+	}
 }
