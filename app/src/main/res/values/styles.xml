@@ -9,6 +9,7 @@
         <item name="android:windowBackground">@color/colorBg</item>
         <item name="android:colorBackground">@color/colorBg</item>
         <item name="android:itemBackground">@color/colorBg</item>
+        <item name="android:background">@color/colorBg</item>
 	</style>
     
     <style name="strawberry" parent="Theme">
@@ -21,6 +22,7 @@
         <item name="android:windowBackground">@color/colorBgStrawberry</item>
         <item name="android:colorBackground">@color/colorBgStrawberry</item>
         <item name="android:itemBackground">@color/colorBgStrawberry</item>
+        <item name="android:background">@color/colorBgStrawberry</item>
     </style>
 
     <style name="light" parent="Theme">
@@ -33,6 +35,7 @@
         <item name="android:windowBackground">@color/colorBgLight</item>
         <item name="android:colorBackground">@color/colorBgLight</item>
         <item name="android:itemBackground">@color/colorBgLight</item>
+        <item name="android:background">@color/colorBgLight</item>
 	</style>
     
 	<style name="Theme.FullScreen" parent="Theme">
