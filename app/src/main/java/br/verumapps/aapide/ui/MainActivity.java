@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.Context;
 import android.preference.PreferenceManager;
+import br.verumapps.utils.ThemeManager;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     private AlertDialog.Builder dialog;
     
     //SharedPreferences sharedPref = getSharedPreferences("synced", Context.MODE_PRIVATE);
+    ThemeManager tm = new ThemeManager(getBaseContext());
     
     // Menu
     @Override
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate (Bundle savedInstanceState)
     {
         String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
-        setTheme(getTheme(theme));
+        tm.setActivityTheme(theme);
         //setTheme(R.style.strawberry);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -189,12 +191,4 @@ public class MainActivity extends AppCompatActivity
             handler.postDelayed(refreshers, 100000);
 		}
 	};
-    
-    private int getTheme(String name) {
-        switch (name) {
-            case "Strawberry": return R.style.strawberry;
-            case "Light": return R.style.light;
-            default: return R.style.Theme;
-        }
-    }
 }

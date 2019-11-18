@@ -7,6 +7,9 @@ import androidx.appcompat.widget.Toolbar;
 import br.verumapps.aapide.R;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import br.verumapps.utils.ThemeManager;
+import android.content.Context;
+import android.preference.PreferenceManager;
 
 public class TextEditorActivity extends AppCompatActivity
 {
@@ -16,9 +19,13 @@ public class TextEditorActivity extends AppCompatActivity
 
 	Toolbar toolbar;
     
+    ThemeManager tm = new ThemeManager(getBaseContext());
+    
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
+        String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
+        tm.setActivityTheme(theme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_texteditor);
 		toolbar = findViewById(R.id.my_toolbar);
