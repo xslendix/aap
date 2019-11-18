@@ -31,6 +31,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import br.verumapps.utils.ThemeManager;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity
     private AlertDialog.Builder dialog;
     
     //SharedPreferences sharedPref = getSharedPreferences("synced", Context.MODE_PRIVATE);
+    ThemeManager tm = new ThemeManager(getBaseContext());
     
     // Menu
     @Override
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate (Bundle savedInstanceState)
     {
         String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
-        setTheme(getTheme(theme));
+        tm.setActivityTheme(theme);
         //setTheme(R.style.strawberry);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -122,6 +124,7 @@ public class MainActivity extends AppCompatActivity
     private void initializeView ()
     {
         dialog = new AlertDialog.Builder(this);
+        
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.menu);
@@ -134,16 +137,19 @@ public class MainActivity extends AppCompatActivity
 			});
 			
     }
-private void createProjectDialog(){
-	final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
-	LayoutInflater inflater = this.getLayoutInflater();
-	View dialogView = inflater.inflate(R.layout.layout_create_project, null);
+    private void createProjectDialog(){
+        // will fix later
+	    // final AlertDialog dialogBuilder = new AlertDialog.Builder(getBaseContext(), tm.getDialogTheme(PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light"))).create();
+	    final AlertDialog dialogBuilder = new AlertDialog.Builder(this);
+        
+        LayoutInflater inflater = this.getLayoutInflater();
+	    View dialogView = inflater.inflate(R.layout.layout_create_project, null);
 
-	final EditText app_name = (EditText) dialogView.findViewById(R.id.app_name);
-	Button button1 = (Button) dialogView.findViewById(R.id.create);
-	final EditText package_name = (EditText) dialogView.findViewById(R.id.package_name);
+	    final EditText app_name = (EditText) dialogView.findViewById(R.id.app_name);
+	    Button button1 = (Button) dialogView.findViewById(R.id.create);
+	    final EditText package_name = (EditText) dialogView.findViewById(R.id.package_name);
 	
-	button1.setOnClickListener(new View.OnClickListener() {
+	    button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // DO SOMETHINGS
