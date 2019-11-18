@@ -36,6 +36,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import android.content.DialogInterface;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -155,30 +156,24 @@ public class MainActivity extends AppCompatActivity
     }
     private void createProjectDialog ()
     {
-        // will fix later
-	    //final AlertDialog dialogBuilder = new AlertDialog.Builder(getBaseContext(), tm.getDialogTheme(PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light"))).create();
-        //(ygor) fixed the AlertDialog builder for now, you forgot to add .create() to it
 	    final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
-        dialog.setTitle("Create project");
         LayoutInflater inflater = this.getLayoutInflater();
 	    View dialogView = inflater.inflate(R.layout.layout_create_project, null);
-
-	    final EditText app_name = dialogView.findViewById(R.id.app_name);
-	    Button button1 = dialogView.findViewById(R.id.create);
-	    final EditText package_name = dialogView.findViewById(R.id.package_name);
-
-	    button1.setOnClickListener(new View.OnClickListener() {
+        
+        dialogBuilder.setTitle(getString(R.string.create_project_dialog_title));
+        dialogBuilder.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.create_project_dialog_okbutton), new DialogInterface.OnClickListener()
+            {
                 @Override
-                public void onClick (View view)
+                public void onClick (DialogInterface p1, int p2)
                 {
-                    // DO SOMETHINGS
-                    dialogBuilder.dismiss();
+                    
                 }
-            });
-
+        });
+        
         dialogBuilder.setView(dialogView);
         dialogBuilder.show();
     }
+    
     String path = FileUtil.getExternalStorageDir() + pu.defaultPath;
 
     private void loadProjects ()

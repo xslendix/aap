@@ -6,29 +6,40 @@
 	android:orientation="vertical"
 	android:padding="10dp">
 
-	<EditText
+	<com.google.android.material.textfield.TextInputLayout
+		style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 		android:layout_width="match_parent"
-		android:ems="10"
 		android:layout_height="wrap_content"
-		android:hint="App Name"
-		android:layout_margin="8dp"
-		android:id="@+id/app_name"/>
+		android:hint="@string/create_project_dialog_appname"
+		android:singleLine="true"
+		android:layout_marginLeft="8dp"
+		android:layout_marginRight="8dp"
+		android:layout_marginTop="4dp">
 
-	<EditText
+		<com.google.android.material.textfield.TextInputEditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/app_name"/>
+
+	</com.google.android.material.textfield.TextInputLayout>
+
+	<com.google.android.material.textfield.TextInputLayout
+		style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 		android:layout_width="match_parent"
-		android:ems="10"
 		android:layout_height="wrap_content"
-		android:hint="Package Name"
-		android:layout_margin="8dp"
-		android:id="@+id/package_name"/>
+		android:hint="@string/create_project_dialog_packagename"
+		android:singleLine="true"
+		android:layout_marginRight="8dp"
+		android:layout_marginLeft="8dp"
+		android:layout_marginBottom="2dp"
+		android:layout_marginTop="4dp">
 
-	<Button
-		android:layout_width="wrap_content"
-		style="?android:attr/buttonBarButtonStyle"
-		android:layout_height="wrap_content"
-		android:text="Create"
-		android:layout_margin="4dp"
-		android:id="@+id/create"/>
+		<com.google.android.material.textfield.TextInputEditText
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:id="@+id/package_name"/>
+
+	</com.google.android.material.textfield.TextInputLayout>
 
 </LinearLayout>
 

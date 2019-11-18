@@ -1,18 +1,13 @@
 package br.verumapps.aapide.ui.views;
 
-import br.verumapps.aapide.R;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.widget.EditText;
 import br.verumapps.aapide.R;
-import android.graphics.Typeface;
-import android.content.ContentUris;
-import androidx.core.content.res.ResourcesCompat;
-import android.view.ViewStructure;
 
 public class CustomEditText extends EditText
 {
@@ -43,7 +38,7 @@ public class CustomEditText extends EditText
     {
         this.setBackgroundColor(getResources().getColor(R.color.editorBgColor));
         this.setTextColor(getResources().getColor(R.color.editorCodeColor));
-        
+
         int nr = 0;
         int n = getLineCount();
 
@@ -64,7 +59,7 @@ public class CustomEditText extends EditText
         }
 
         this.setPadding(40 * nr + 4, 0, 0, 0);
-        
+
         super.onDraw(canvas);
     }
 }

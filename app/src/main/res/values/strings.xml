@@ -8,6 +8,10 @@
     <string name="ui_editor">Layout Editor</string>
 	<string name="project_options">Project Options</string>
 	<string name="project_options_desc">Choose an option for project </string>
+    <string name="create_project_dialog_title">Create new project</string>
+    <string name="create_project_dialog_appname">App name</string>
+    <string name="create_project_dialog_packagename">Package name</string>
+    <string name="create_project_dialog_okbutton">Create</string>
 	<string name="ok">Ok</string>
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
