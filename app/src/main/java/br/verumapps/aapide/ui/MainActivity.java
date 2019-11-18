@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity
     private AlertDialog.Builder dialog;
     
     //SharedPreferences sharedPref = getSharedPreferences("synced", Context.MODE_PRIVATE);
-    ThemeManager tm = new ThemeManager(getBaseContext());
+    ThemeManager tm = new ThemeManager(MainActivity.this);
     
     // Menu
     @Override
@@ -80,8 +80,12 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
+		//Fixed context thing 
+		
         String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
-        //tm.setActivityTheme(theme);
+		tm.setActivityTheme(theme);
+		
+		//tm.setActivityTheme(theme);
         //setTheme(R.style.strawberry);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -143,7 +147,7 @@ public class MainActivity extends AppCompatActivity
 	    //final AlertDialog dialogBuilder = new AlertDialog.Builder(getBaseContext(), tm.getDialogTheme(PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light"))).create();
         //(ygor) fixed the AlertDialog builder for now, you forgot to add .create() to it
 	    final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
-        
+        dialog.setTitle("Create project");
         LayoutInflater inflater = this.getLayoutInflater();
 	    View dialogView = inflater.inflate(R.layout.layout_create_project, null);
 
@@ -158,7 +162,7 @@ public class MainActivity extends AppCompatActivity
                 dialogBuilder.dismiss();
             }
         });
-dialog.setTitle("Create project");
+
 	dialogBuilder.setView(dialogView);
 	dialogBuilder.show();
 }

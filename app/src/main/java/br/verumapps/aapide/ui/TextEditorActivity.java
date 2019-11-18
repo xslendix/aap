@@ -19,13 +19,14 @@ public class TextEditorActivity extends AppCompatActivity
 
 	Toolbar toolbar;
     
-    ThemeManager tm = new ThemeManager(getBaseContext());
+    ThemeManager tm = new ThemeManager(TextEditorActivity.this);
     
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
+		//Radu, I "fixed" the context thing - 
         String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
-        tm.setActivityTheme(theme);
+      tm.setActivityTheme(theme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_texteditor);
 		toolbar = findViewById(R.id.my_toolbar);
