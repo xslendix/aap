@@ -29,5 +29,9 @@
             android:name="br.verumapps.aapide.ui.UIEditor"
             android:label="@string/app_name">
         </activity>
+		<activity
+            android:name="br.verumapps.aapide.ui.FileExplorer"
+            android:label="@string/app_name">
+        </activity>
     </application>
 </manifest>

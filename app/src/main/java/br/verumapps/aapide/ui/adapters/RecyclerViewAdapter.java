@@ -1,6 +1,6 @@
 package br.verumapps.aapide.ui.adapters;
 
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +71,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick (View v)
         {
-            Log.d("$$$", "Elemento " + getAdapterPosition() + " clicado.");
+           Intent intent = new Intent();
+			intent.setClass(v.getContext(), br.verumapps.aapide.ui.FileExplorer.class);
+			intent.putExtra("path",userList.get(getAdapterPosition()).getDesc() );
+			v.getContext().startActivity(intent);
+			
+		   
         }
     }
 }
