@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,7 +57,63 @@ public class FileExplorer extends AppCompatActivity
 	private Button button1;
 	private ListView list;
 	private ObjectAnimator oa = new ObjectAnimator();
+	/*
+	Crashing, error log:
 	
+	 FATAL EXCEPTION: main
+	 Process: br.verumapps.aapide, PID: 30097
+	 java.lang.RuntimeException: Missing type parameter.
+	 at wv.a(SourceFile:84)
+	 at wv.<init>(SourceFile:62)
+	 at br.verumapps.aapide.ui.d.<init>(Unknown Source:0)
+	 at br.verumapps.aapide.ui.c.getView(SourceFile:239)
+	 at android.widget.AbsListView.obtainView(AbsListView.java:2366)
+	 at android.widget.ListView.measureHeightOfChildren(ListView.java:1408)
+	 at android.widget.ListView.onMeasure(ListView.java:1315)
+	 at android.view.View.measure(View.java:23190)
+	 at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:6749)
+	 at androidx.coordinatorlayout.widget.CoordinatorLayout.a(SourceFile:733)
+	 at androidx.coordinatorlayout.widget.CoordinatorLayout.onMeasure(SourceFile:805)
+	 at android.view.View.measure(View.java:23190)
+	 at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:6749)
+	 at android.widget.FrameLayout.onMeasure(FrameLayout.java:185)
+	 at androidx.appcompat.widget.ContentFrameLayout.onMeasure(SourceFile:143)
+	 at android.view.View.measure(View.java:23190)
+	 at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:6749)
+	 at android.widget.LinearLayout.measureChildBeforeLayout(LinearLayout.java:1535)
+	 at android.widget.LinearLayout.measureVertical(LinearLayout.java:825)
+	 at android.widget.LinearLayout.onMeasure(LinearLayout.java:704)
+	 at android.view.View.measure(View.java:23190)
+	 at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:6749)
+	 at android.widget.FrameLayout.onMeasure(FrameLayout.java:185)
+	 at android.view.View.measure(View.java:23190)
+	 at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:6749)
+	 at android.widget.LinearLayout.measureChildBeforeLayout(LinearLayout.java:1535)
+	 at android.widget.LinearLayout.measureVertical(LinearLayout.java:825)
+	 at android.widget.LinearLayout.onMeasure(LinearLayout.java:704)
+	 at android.view.View.measure(View.java:23190)
+	 at android.view.ViewGroup.measureChildWithMargins(ViewGroup.java:6749)
+	 at android.widget.FrameLayout.onMeasure(FrameLayout.java:185)
+	 at com.android.internal.policy.DecorView.onMeasure(DecorView.java:716)
+	 at android.view.View.measure(View.java:23190)
+	 at android.view.ViewRootImpl.performMeasure(ViewRootImpl.java:2743)
+	 at android.view.ViewRootImpl.measureHierarchy(ViewRootImpl.java:1593)
+	 at android.view.ViewRootImpl.performTraversals(ViewRootImpl.java:1876)
+	 at android.view.ViewRootImpl.doTraversal(ViewRootImpl.java:1481)
+	 at android.view.ViewRootImpl$TraversalRunnable.run(ViewRootImpl.java:7380)
+	 at android.view.Choreographer$CallbackRecord.run(Choreographer.java:949)
+	 at android.view.Choreographer.doCallbacks(Choreographer.java:761)
+	 at android.view.Choreographer.doFrame(Choreographer.java:696)
+	 at android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:935)
+	 at android.os.Handler.handleCallback(Handler.java:873)
+	 at android.os.Handler.dispatchMessage(Handler.java:99)
+	 at android.os.Looper.loop(Looper.java:193)
+	 at android.app.ActivityThread.main(ActivityThread.java:6723)
+	 at java.lang.reflect.Method.invoke(Native Method)
+	 at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:493)
+	 at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:858)
+	
+	*/
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
@@ -77,16 +133,16 @@ public class FileExplorer extends AppCompatActivity
 
     private void initialize()
     {
-        button1 = (Button) findViewById(R.id.button1);
+       // button1 = (Button) findViewById(R.id.button1);
 		list = (ListView) findViewById(R.id.list);
-
+/*
 		button1.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View _view) {
 					_loadFileList(path);
 				}
 			});
-
+*/
 		list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 				@Override
 				public void onItemClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
@@ -94,7 +150,7 @@ public class FileExplorer extends AppCompatActivity
 					path_before = path;
 					if (FileUtil.isDirectory(string_analysis.get((int)(_position)))) {
 						path = string_analysis.get((int)(_position));
-						_loadFileList(path);
+						loadFileList(path);
 					}
 					else {
 
@@ -112,12 +168,14 @@ public class FileExplorer extends AppCompatActivity
 			});
 	}
 	private void initializeLogic() {
+		
 		list.setAdapter(new ListAdapter(file_list));
 		folder = 0;
 		file = 1;
 		default_path = getIntent().getStringExtra("path");
+		Toast.makeText(getApplicationContext(), default_path,0).show();
 		path = default_path;
-		_loadFileList(path);
+		loadFileList(path);
 	}
 
 	@Override
@@ -136,29 +194,29 @@ public class FileExplorer extends AppCompatActivity
 		if (!default_path.contains(path)) {
 			java.io.File f = new java.io.File(path);
 			path = f.getParent();
-			_loadFileList(path);
+			loadFileList(path);
 		}
 		else {
 			finish();
 		}
 	}
-	private void _addItem (final String _file_name, final String _extension, final String _file_path) {
+	private void addItem (final String file_name, final String extension, final String file_path) {
 		vibe_check = 0;
-		ext_temp = _extension;
-		if (FileUtil.isDirectory(_file_path)) {
+		ext_temp = extension;
+		if (FileUtil.isDirectory(file_path)) {
 			vibe_check = folder;
 			ext_temp = "";
 		}
 		else {
 
 		}
-		if (FileUtil.isFile(_file_path)) {
+		if (FileUtil.isFile(file_path)) {
 			vibe_check = file;
-			ext_temp = _extension;
+			ext_temp = extension;
 		}
-		map_file_tmp.put("name", _file_name);
+		map_file_tmp.put("name", file_name);
 		map_file_tmp.put("extension", ext_temp);
-		map_file_tmp.put("path", _file_path);
+		map_file_tmp.put("path", file_path);
 		map_file_tmp.put("vibe_check", String.valueOf((long)(vibe_check)));
 		{
 			HashMap<String, Object> _item = new HashMap<>();
@@ -169,22 +227,22 @@ public class FileExplorer extends AppCompatActivity
 	}
 
 
-	private void _loadFileList (final String _path) {
+	private void loadFileList (final String path) {
 		file_list.clear();
 		string_analysis.clear();
 		i = 0;
-		FileUtil.listDir(_path, string_analysis);
+		FileUtil.listDir(path, string_analysis);
 		Collections.sort(string_analysis);
 		for(int _repeat12 = 0; _repeat12 < (int)(string_analysis.size()); _repeat12++) {
 			if (Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((int)(0), (int)(2)).contains(".".trim())) {
-				_addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment(), "", string_analysis.get((int)(i)));
+				addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment(), "", string_analysis.get((int)(i)));
 			}
 			else {
 				if (Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().contains(".".trim())) {
-					_addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((int)(0), (int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().lastIndexOf("."))).concat(""), Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().lastIndexOf(".")), (int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().length())).concat(" file"), string_analysis.get((int)(i)));
+					addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((int)(0), (int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().lastIndexOf("."))).concat(""), Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().lastIndexOf(".")), (int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().length())).concat(" file"), string_analysis.get((int)(i)));
 				}
 				else {
-					_addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment(), "", string_analysis.get((int)(i)));
+					addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment(), "", string_analysis.get((int)(i)));
 				}
 			}
 			i++;
