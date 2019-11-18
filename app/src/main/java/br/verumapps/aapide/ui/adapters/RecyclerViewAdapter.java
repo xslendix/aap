@@ -71,12 +71,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick (View v)
         {
-           Intent intent = new Intent();
+            Intent intent = new Intent();
 			intent.setClass(v.getContext(), br.verumapps.aapide.ui.FileExplorer.class);
-			intent.putExtra("path",userList.get(getAdapterPosition()).getDesc() );
+			intent.putExtra("path", userList.get(getAdapterPosition()).getDesc());
 			v.getContext().startActivity(intent);
-			
-		   
+
+
         }
     }
 }

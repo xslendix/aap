@@ -61,27 +61,29 @@ public class JsonUtils
             return false;
         }
     }
-    
+
     public static JSONArray getArray (String Json, String key)
     {
         try
         {
             JSONObject js = new JSONObject(Json);
             return js.getJSONArray(key);
-        } catch (JSONException e)
+        }
+        catch (JSONException e)
         {
             e.printStackTrace();
             return null;
         }
     }
-    
+
     public static JSONObject getJSONObject (String Json, String key)
     {
         try
         {
             JSONObject js = new JSONObject(Json);
             return js.getJSONObject(key);
-        } catch (JSONException e)
+        }
+        catch (JSONException e)
         {
             e.printStackTrace();
             return null;

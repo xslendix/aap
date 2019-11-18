@@ -45,7 +45,7 @@ public class TextEditorActivity extends AppCompatActivity
     private void initializeCode() 
     {
         LinearLayoutManager layoutManager= new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(layoutManager);
         
     }

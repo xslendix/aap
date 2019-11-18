@@ -20,9 +20,15 @@ public class ThemeManager
 
         switch (name)
         {
-            case "Strawberry": id = R.style.strawberry; break;
-            case "Light": id = R.style.light; break;
-            default: id = R.style.Theme; break;
+            case "Strawberry":
+                id = R.style.strawberry;
+                break;
+            case "Light":
+                id = R.style.light;
+                break;
+            default:
+                id = R.style.Theme;
+                break;
         }
 
         // for som reason it is null

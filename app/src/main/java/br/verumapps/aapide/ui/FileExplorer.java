@@ -134,7 +134,7 @@ public class FileExplorer extends AppCompatActivity
     private void initialize()
     {
        // button1 = (Button) findViewById(R.id.button1);
-		list = (ListView) findViewById(R.id.list);
+		list = findViewById(R.id.list);
 /*
 		button1.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -148,8 +148,8 @@ public class FileExplorer extends AppCompatActivity
 				public void onItemClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
 					final int _position = _param3;
 					path_before = path;
-					if (FileUtil.isDirectory(string_analysis.get((int)(_position)))) {
-						path = string_analysis.get((int)(_position));
+					if (FileUtil.isDirectory(string_analysis.get((_position)))) {
+						path = string_analysis.get((_position));
 						loadFileList(path);
 					}
 					else {
@@ -234,12 +234,12 @@ public class FileExplorer extends AppCompatActivity
 		FileUtil.listDir(path, string_analysis);
 		Collections.sort(string_analysis);
 		for(int _repeat12 = 0; _repeat12 < (int)(string_analysis.size()); _repeat12++) {
-			if (Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((int)(0), (int)(2)).contains(".".trim())) {
+			if (Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((0), (2)).contains(".".trim())) {
 				addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment(), "", string_analysis.get((int)(i)));
 			}
 			else {
 				if (Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().contains(".".trim())) {
-					addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((int)(0), (int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().lastIndexOf("."))).concat(""), Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().lastIndexOf(".")), (int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().length())).concat(" file"), string_analysis.get((int)(i)));
+					addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((0), (int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().lastIndexOf("."))).concat(""), Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().substring((int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().lastIndexOf(".")), (int)(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment().length())).concat(" file"), string_analysis.get((int)(i)));
 				}
 				else {
 					addItem(Uri.parse(string_analysis.get((int)(i))).getLastPathSegment(), "", string_analysis.get((int)(i)));
@@ -252,7 +252,7 @@ public class FileExplorer extends AppCompatActivity
 		oa.setTarget(list);
 		oa.setPropertyName("scaleX");
 		oa.setFloatValues((float)(1.0d));
-		oa.setDuration((int)(300));
+		oa.setDuration((300));
 		oa.start();
 	}
 
@@ -285,14 +285,14 @@ public class FileExplorer extends AppCompatActivity
 				_v = _inflater.inflate(R.layout.layout_file, null);
 			}
 
-			final LinearLayout body = (LinearLayout) _v.findViewById(R.id.body);
-			final ImageView icon = (ImageView) _v.findViewById(R.id.icon);
-			final LinearLayout text_body = (LinearLayout) _v.findViewById(R.id.text_body);
-			final TextView text_file = (TextView) _v.findViewById(R.id.text_file);
-			final TextView text_description = (TextView) _v.findViewById(R.id.text_description);
+			final LinearLayout body = _v.findViewById(R.id.body);
+			final ImageView icon = _v.findViewById(R.id.icon);
+			final LinearLayout text_body = _v.findViewById(R.id.text_body);
+			final TextView text_file = _v.findViewById(R.id.text_file);
+			final TextView text_description = _v.findViewById(R.id.text_description);
 
 			map_adapter_tmp.clear();
-			map_adapter_tmp = new Gson().fromJson(_data.get((int)_position).get("json").toString(), new TypeToken<HashMap<String, Object>>(){}.getType());
+			map_adapter_tmp = new Gson().fromJson(_data.get(_position).get("json").toString(), new TypeToken<HashMap<String, Object>>(){}.getType());
 			text_file.setText(map_adapter_tmp.get("name").toString());
 			text_description.setText(map_adapter_tmp.get("extension").toString());
 			if (map_adapter_tmp.get("vibe_check").toString().equals("0")) {

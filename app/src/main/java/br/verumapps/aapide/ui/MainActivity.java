@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
 
     private AlertDialog.Builder dialog;
-    
+
     //SharedPreferences sharedPref = getSharedPreferences("synced", Context.MODE_PRIVATE);
     ThemeManager tm = new ThemeManager(MainActivity.this);
-    
+
     // Menu
     @Override
     public boolean onCreateOptionsMenu (Menu menu)
@@ -65,11 +65,13 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
-    
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected (MenuItem item)
+    {
         // Handle item selection
-        switch (item.getItemId()) {
+        switch (item.getItemId())
+        {
             case R.id.openeditor:
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), TextEditorActivity.class);
@@ -79,20 +81,20 @@ public class MainActivity extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
     }
-    
+
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
 		//Fixed context thing 
-		
+
         String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
 		tm.setActivityTheme(theme);
-		
+
 		//tm.setActivityTheme(theme);
         //setTheme(R.style.strawberry);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         initializeView();
         requestPermission();
 		recycleView();
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity
 
     private void recycleView ()
     {
-		
+
         userList = new ArrayList<>();
         swipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
         swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_light);
@@ -118,9 +120,9 @@ public class MainActivity extends AppCompatActivity
         recyclerviewAdapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(recyclerviewAdapter);
 		/*
-		recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-																 DividerItemDecoration.VERTICAL));
-		*/
+         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
+         DividerItemDecoration.VERTICAL));
+         */
     }
 	private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener()
     {
@@ -137,20 +139,22 @@ public class MainActivity extends AppCompatActivity
     private void initializeView ()
     {
         dialog = new AlertDialog.Builder(this);
-        
+
         toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         toolbar.inflateMenu(R.menu.menu);
-	
-		FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.fab); 
+
+		FloatingActionButton myFab = findViewById(R.id.fab); 
 		myFab.setOnClickListener(new View.OnClickListener() { 
-				public void onClick(View v) { 
+				public void onClick (View v)
+                { 
 					createProjectDialog(); 
 				} 
 			});
-			
+
     }
-    private void createProjectDialog(){
+    private void createProjectDialog ()
+    {
         // will fix later
 	    //final AlertDialog dialogBuilder = new AlertDialog.Builder(getBaseContext(), tm.getDialogTheme(PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light"))).create();
         //(ygor) fixed the AlertDialog builder for now, you forgot to add .create() to it
@@ -159,21 +163,22 @@ public class MainActivity extends AppCompatActivity
         LayoutInflater inflater = this.getLayoutInflater();
 	    View dialogView = inflater.inflate(R.layout.layout_create_project, null);
 
-	    final EditText app_name = (EditText) dialogView.findViewById(R.id.app_name);
-	    Button button1 = (Button) dialogView.findViewById(R.id.create);
-	    final EditText package_name = (EditText) dialogView.findViewById(R.id.package_name);
-	
-	    button1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // DO SOMETHINGS
-                dialogBuilder.dismiss();
-            }
-        });
+	    final EditText app_name = dialogView.findViewById(R.id.app_name);
+	    Button button1 = dialogView.findViewById(R.id.create);
+	    final EditText package_name = dialogView.findViewById(R.id.package_name);
 
-	dialogBuilder.setView(dialogView);
-	dialogBuilder.show();
-}
+	    button1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick (View view)
+                {
+                    // DO SOMETHINGS
+                    dialogBuilder.dismiss();
+                }
+            });
+
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.show();
+    }
     String path = FileUtil.getExternalStorageDir() + pu.defaultPath;
 
     private void loadProjects ()
@@ -227,7 +232,7 @@ public class MainActivity extends AppCompatActivity
         {
         }
     }
-    
+
     private Runnable refreshers = new Runnable() {
 
 		@Override
@@ -240,15 +245,18 @@ public class MainActivity extends AppCompatActivity
             handler.postDelayed(refreshers, 100000);
 		}
 	};
-    
-    private int getTheme(String name) {
-        switch (name) {
+
+    private int getTheme (String name)
+    {
+        switch (name)
+        {
             case "Strawberry": return R.style.strawberry;
             case "Light": return R.style.light;
             default: return R.style.Theme;
         }
     }
-	private void runLayoutAnimation(final RecyclerView recyclerView) {
+	private void runLayoutAnimation (final RecyclerView recyclerView)
+    {
 		final Context context = recyclerView.getContext();
 		final LayoutAnimationController controller =
             AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_fall_down);
