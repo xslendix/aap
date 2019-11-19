@@ -80,10 +80,15 @@ public class MainActivity extends AppCompatActivity
                 Intent i = new Intent();
                 i.setClass(getBaseContext(), TextEditorActivity.class);
                 startActivity(i);
+                break;
+            case R.id.openuieditor:
+                Intent ay = new Intent(MainActivity.this, UIEditor.class);
+                startActivity(ay);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+        return false;
     }
 
     @Override
