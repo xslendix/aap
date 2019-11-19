@@ -37,6 +37,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.DialogInterface;
+import br.verumapps.utils.AndroidProjectUtil;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate (Bundle savedInstanceState)
     {
 		//Fixed context thing 
-
+		a = new AndroidProjectUtil(getApplicationContext());
         String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
 		//tm.setActivityTheme(theme);
 
@@ -125,12 +126,14 @@ public class MainActivity extends AppCompatActivity
          DividerItemDecoration.VERTICAL));
          */
     }
+	AndroidProjectUtil a;
 	private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener()
     {
 		@Override
 		public void onRefresh ()
         {
 			swipeRefreshLayout.setRefreshing(true);
+			a.create("Twste","com.projectname");
 			loadProjects();
 			swipeRefreshLayout.setRefreshing(false);
 		}
