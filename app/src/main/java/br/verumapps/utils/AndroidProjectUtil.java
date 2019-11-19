@@ -1,86 +1,103 @@
 package br.verumapps.utils;
 
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import android.widget.Toast;
 
 public class AndroidProjectUtil
 {
 	Context c;
+	static String project_path;
 	public AndroidProjectUtil(final Context c){
 		this.c = c;
+		
+		project_path = (FileUtil.getExternalStorageDir() + new PathUtil().defaultPath);
 	}
     public void create(String name, String package_name){
-		String project_path;
-		project_path = (FileUtil.getExternalStorageDir() + new PathUtil().defaultPath);
+		
+		String[] ary = package_name.split("[.]");
+	
+	    /* Deleting cache files */
+		FileUtil.deleteFile(project_path + "/.cache");
 		FileUtil.makeDir(project_path + "/.cache");
+		/* Create basic android project directories */
 		FileUtil.makeDir(project_path + name);
 		FileUtil.makeDir(project_path + name + "/app");
 		FileUtil.makeDir(project_path + name + "/app/src");
 		FileUtil.makeDir(project_path + name + "/app/src/main");
 		FileUtil.makeDir(project_path + name + "/app/src/main/java");
-		String[] ary = package_name.split(".");
+		
+		
 		try{
-			copyFileFromAssets(c,"app_template/AndroidManifest.xml", (project_path + "/app/src/main"));
+			/* Copy AndroidManifest Template to the right place */
+			copyAssets("AndroidManifest.xml", (project_path + name+ "/app/src/main/"));
+			/* Creating MainActivity */
 			String p_r = project_path + name + "/app/src/main/java/";
-			StringBuilder stringBuilder = new StringBuilder();
+		
 			for (int i = 0; i < ary.length; i++) {
 				p_r = p_r + ary[i] + "/";
 				FileUtil.makeDir(p_r);
 			}
-		    copyFileFromAssets(c,"app_template/MainActivity.java", p_r);
-			copyFileFromAssets(c,"app_template/res.zip",FileUtil.getExternalStorageDir() + "/.cache");
-			Decompress.unzip(new File(FileUtil.getExternalStorageDir() + "/.cache/res.zip"),new File(project_path + name + "/app/src/main/rea"));
+		    copyAssets("MainActivity.java", p_r);
+			/* res template */
+			copyAssets("res.zip",FileUtil.getExternalStorageDir() + new PathUtil().defaultPath + "/.cache/");
+			Decompress.unzip(new File(FileUtil.getExternalStorageDir() +  new PathUtil().defaultPath + "/.cache/res.zip"),new File(project_path + name + "/app/src/main/"));
+		
+			
+			/* Replace com.packagename with package_name */
+			String manifest_path = project_path + name+ "/app/src/main/" + "AndroidManifest.xml";
+			FileUtil.writeFile(p_r+"MainActivity.java",FileUtil.readFile(p_r+"MainActivity.java").replace("com.packagename",package_name));
+			FileUtil.writeFile(manifest_path,FileUtil.readFile(manifest_path).replace("com.packagename",package_name));
 			
 			}catch(Exception e){
-			
+				/* Log errors */
+				FileUtil.writeFile(project_path + "/.cache" + "/error.log", e.toString());
 		}
+		
 		}
-	//ere is the clean version of the OP's answer.
 
-
-	static public void copyFileFromAssets(Context context, String file, String dest) throws Exception 
+	private void copyAssets(String file, String path)
 	{
+		AssetManager assetManager = c.getAssets();
+		String[] files = null;
 		InputStream in = null;
-		OutputStream fout = null;
-		int count = 0;
-
+		OutputStream out = null;
+		String filename = file;
 		try
 		{
-			in = context.getAssets().open(file);
-			fout = new FileOutputStream(new File(dest));
-
-			byte data[] = new byte[1024];
-			while ((count = in.read(data, 0, 1024)) != -1)
-			{
-				fout.write(data, 0, count);
-			}
+            in = assetManager.open("app_template/" + filename);
+            out = new FileOutputStream(path + filename);
+            copyFile(in, out);
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
 		}
-		catch (Exception e) 
+		catch(IOException e)
 		{
-			e.printStackTrace();
-		}   
-		finally
+			/* Log errors */
+			FileUtil.writeFile(project_path + "/.cache" + "/error4.log", e.toString());
+			
+		}      
+	}
+
+	private void copyFile(InputStream in, OutputStream out) throws IOException
+	{
+		byte[] buffer = new byte[1024];
+		int read;
+		while((read = in.read(buffer)) != -1)
 		{
-			if (in != null)
-			{
-				try {
-					in.close();
-				} catch (IOException e) 
-				{
-				}
-			}
-			if (fout != null)
-			{
-				try {
-					fout.close();
-				} catch (IOException e) {
-				}
-			}
+            out.write(buffer, 0, read);
 		}
 	}
+
 	
-}
+	
+} 

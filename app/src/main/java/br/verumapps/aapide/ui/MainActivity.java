@@ -42,11 +42,7 @@ import br.verumapps.utils.AndroidProjectUtil;
 public class MainActivity extends AppCompatActivity
 {
 
-	/*
-
-     OnClick RecycleView is in RecycleviewAdapter
-
-     */
+	
     FileUtil fu = new FileUtil();
     PathUtil pu = new PathUtil();
     Handler handler = new Handler();
@@ -60,6 +56,12 @@ public class MainActivity extends AppCompatActivity
     //SharedPreferences sharedPref = getSharedPreferences("synced", Context.MODE_PRIVATE);
     ThemeManager tm = new ThemeManager(MainActivity.this);
 
+	private SwipeRefreshLayout swipeRefreshLayout;
+	private RecyclerView recyclerView;
+	private RecyclerViewAdapter recyclerviewAdapter;
+	private List<User> userList;
+	AndroidProjectUtil a;
+	
     // Menu
     @Override
     public boolean onCreateOptionsMenu (Menu menu)
@@ -87,26 +89,27 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
-		//Fixed context thing 
+		
 		a = new AndroidProjectUtil(getApplicationContext());
+		/*
+		
+		Theme thing: will be fixed later
+		
         String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
-		//tm.setActivityTheme(theme);
-
-		//tm.setActivityTheme(theme);
-        //setTheme(R.style.strawberry);
+		tm.setActivityTheme(theme);
+        setTheme(R.style.strawberry);
+		
+		*/
+		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+		/* Needed methods */
         initializeView();
         requestPermission();
 		recycleView();
+		/* Update list */
 		handler.post(refreshers);
     }
-
-	private SwipeRefreshLayout swipeRefreshLayout;
-	private RecyclerView recyclerView;
-	private RecyclerViewAdapter recyclerviewAdapter;
-	private List<User> userList;
 
     private void recycleView ()
     {
@@ -121,19 +124,16 @@ public class MainActivity extends AppCompatActivity
 
         recyclerviewAdapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(recyclerviewAdapter);
-		/*
-         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(),
-         DividerItemDecoration.VERTICAL));
-         */
+		
     }
-	AndroidProjectUtil a;
+	
 	private SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener()
     {
 		@Override
 		public void onRefresh ()
         {
 			swipeRefreshLayout.setRefreshing(true);
-			a.create("Twste","com.projectname");
+			
 			loadProjects();
 			swipeRefreshLayout.setRefreshing(false);
 		}
@@ -162,14 +162,16 @@ public class MainActivity extends AppCompatActivity
 	    final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
         LayoutInflater inflater = this.getLayoutInflater();
 	    View dialogView = inflater.inflate(R.layout.layout_create_project, null);
-        
+       final com.google.android.material.textfield.TextInputEditText c = (com.google.android.material.textfield.TextInputEditText)dialogView.findViewById(R.id.package_name);
+	final	com.google.android.material.textfield.TextInputEditText b = (com.google.android.material.textfield.TextInputEditText)dialogView.findViewById(R.id.app_name);
         dialogBuilder.setTitle(getString(R.string.create_project_dialog_title));
         dialogBuilder.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.create_project_dialog_okbutton), new DialogInterface.OnClickListener()
             {
                 @Override
                 public void onClick (DialogInterface p1, int p2)
                 {
-                    
+					a.create(b.getText().toString(), c.getText().toString());
+                    loadProjects();
                 }
         });
         
