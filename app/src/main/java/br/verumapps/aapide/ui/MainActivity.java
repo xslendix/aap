@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity
 		//Fixed context thing 
 
         String theme = PreferenceManager.getDefaultSharedPreferences(this).getString("theme", "Light");
-		tm.setActivityTheme(theme);
+		//tm.setActivityTheme(theme);
 
 		//tm.setActivityTheme(theme);
         //setTheme(R.style.strawberry);

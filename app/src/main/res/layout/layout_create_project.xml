@@ -11,7 +11,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:hint="@string/create_project_dialog_appname"
-		android:singleLine="true"
 		android:layout_marginLeft="8dp"
 		android:layout_marginRight="8dp"
 		android:layout_marginTop="4dp">
@@ -19,7 +18,8 @@
 		<com.google.android.material.textfield.TextInputEditText
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:id="@+id/app_name"/>
+			android:id="@+id/app_name"
+            android:singleLine="true"/>
 
 	</com.google.android.material.textfield.TextInputLayout>
 
@@ -28,7 +28,6 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:hint="@string/create_project_dialog_packagename"
-		android:singleLine="true"
 		android:layout_marginRight="8dp"
 		android:layout_marginLeft="8dp"
 		android:layout_marginBottom="2dp"
@@ -37,7 +36,8 @@
 		<com.google.android.material.textfield.TextInputEditText
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:id="@+id/package_name"/>
+			android:id="@+id/package_name"
+            android:singleLine="true"/>
 
 	</com.google.android.material.textfield.TextInputLayout>
 
