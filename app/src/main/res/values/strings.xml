@@ -23,4 +23,7 @@
 	<string name="replace">Replace with...</string>
 	<string name="search">Search...</string>
 	<string name="ui_editor_preview_placeholder">No Views added yet.\nClick here to add Views and Widgets...</string>
+    <string name="ui_editor_toolbar_undo">Undo</string>
+    <string name="ui_editor_toolbar_redo">Redo</string>
+    <string name="ui_editor_toolbar_save">Save</string>
 </resources>

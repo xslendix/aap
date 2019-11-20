@@ -23,5 +23,8 @@
     <string name="replace">Substituir com...</string>
     <string name="search">Procurar...</string>
     <string name="ui_editor_preview_placeholder">Nenhum View adicionado ainda.\nClique aqui para adicionar View e Widgets...</string>
+    <string name="ui_editor_toolbar_undo">Desfazer</string>
+    <string name="ui_editor_toolbar_redo">Refazer</string>
+    <string name="ui_editor_toolbar_save">Salvar</string>
 
 </resources>

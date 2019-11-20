@@ -10,6 +10,9 @@ import androidx.appcompat.widget.Toolbar;
 import br.verumapps.aapide.R;
 import br.verumapps.utils.GalaxUtils;
 import java.util.function.ToDoubleFunction;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.content.Intent;
 
 public class UIEditor extends AppCompatActivity
 {
@@ -49,6 +52,8 @@ public class UIEditor extends AppCompatActivity
                     }
                 } 
             });
+        setSupportActionBar(toolbar);
+        toolbar.inflateMenu(R.menu.ui_editor_menu);
     }
     
     private void viewToPhoneScreenSize(LinearLayout view, LinearLayout parent){
@@ -64,4 +69,31 @@ public class UIEditor extends AppCompatActivity
         params.width = (int)width; 
         view.setLayoutParams(params);
     }
+    
+    // Menu
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.ui_editor_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item)
+    {
+        // Handle item selection
+        switch (item.getItemId())
+        {
+            case R.id.action_undo:
+                
+                break;
+            case R.id.action_redo:
+                
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return false;
+    }
+    
 }

@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <item
+        android:id="@+id/action_undo"
+        android:orderInCategory="100"
+        android:title="@string/ui_editor_toolbar_undo"
+        android:icon="@drawable/outline_undo_white_24"
+        app:showAsAction="ifRoom"/>                
+    <item
+        android:id="@+id/action_redo"
+        android:orderInCategory="200"
+        android:title="@string/ui_editor_toolbar_redo"
+        android:icon="@drawable/outline_redo_white_24"
+        app:showAsAction="ifRoom" />
+    
+    <item
+        android:id="@+id/action_save"
+        android:orderInCategory="300"
+        android:title="@string/ui_editor_toolbar_save"
+        android:icon="@drawable/outline_save_white_24"
+        app:showAsAction="ifRoom" />
+    
+</menu>
