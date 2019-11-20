@@ -6,6 +6,5 @@ AAP-IDE is an Android IDE for mobile devices
 
 ## Screenshots
 
-![Screenshot](https://raw.githubusercontent.com/goldxn/aap/master/Screenshot1.png)
-
-
+ <img src="https://raw.githubusercontent.com/goldxn/aap/master/Screenshot1.png" width="350" title="n">
+ 
