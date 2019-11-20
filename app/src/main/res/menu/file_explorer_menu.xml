@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <item
+        android:id="@+id/delete_project"
+        android:title="@string/delete_project"/>
+
+    <item
+        android:id="@+id/backup"
+        android:title="@string/backup"/>
+    
+</menu>

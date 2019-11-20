@@ -17,7 +17,7 @@ public class AndroidProjectUtil
 	public AndroidProjectUtil(final Context c){
 		this.c = c;
 		
-		project_path = (FileUtil.getExternalStorageDir() + new PathUtil().defaultPath);
+		project_path = (FileUtil.getExternalStorageDir() + new PathUtil(c).defaultPath);
 	}
     public void create(String name, String package_name){
 		
@@ -46,8 +46,8 @@ public class AndroidProjectUtil
 			}
 		    copyAssets("MainActivity.java", p_r);
 			/* res template */
-			copyAssets("res.zip",FileUtil.getExternalStorageDir() + new PathUtil().defaultPath + "/.cache/");
-			Decompress.unzip(new File(FileUtil.getExternalStorageDir() +  new PathUtil().defaultPath + "/.cache/res.zip"),new File(project_path + name + "/app/src/main/"));
+			copyAssets("res.zip",FileUtil.getExternalStorageDir() + new PathUtil(c).defaultPath + "/.cache/");
+			Decompress.unzip(new File(FileUtil.getExternalStorageDir() +  new PathUtil(c).defaultPath + "/.cache/res.zip"),new File(project_path + name + "/app/src/main/"));
 		
 			
 			/* Replace com.packagename with package_name */

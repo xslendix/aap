@@ -1,6 +1,6 @@
 package br.verumapps.aapide.manager;
 
-public class User
+public class ProjectInfo
 {
     private String title;
     
@@ -8,7 +8,7 @@ public class User
     
     private String desc;
     
-    public User (String name, String desc, String image)
+    public ProjectInfo (String name, String desc, String image)
     {
         this.title = name;
         this.desc = desc;

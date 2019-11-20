@@ -26,7 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import br.verumapps.aapide.R;
-import br.verumapps.aapide.manager.User;
+import br.verumapps.aapide.manager.ProjectInfo;
 import br.verumapps.aapide.ui.adapters.RecyclerViewAdapter;
 import br.verumapps.utils.FileUtil;
 import br.verumapps.utils.PathUtil;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
 
 	
     FileUtil fu = new FileUtil();
-    PathUtil pu = new PathUtil();
+    PathUtil pu;
     Handler handler = new Handler();
 
     private CoordinatorLayout cl;
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
 	private SwipeRefreshLayout swipeRefreshLayout;
 	private RecyclerView recyclerView;
 	private RecyclerViewAdapter recyclerviewAdapter;
-	private List<User> userList;
+	private List<ProjectInfo> projectList;
 	AndroidProjectUtil a;
 	
     // Menu
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate (Bundle savedInstanceState)
     {
-		
+		pu = new PathUtil(getApplicationContext());
 		a = new AndroidProjectUtil(getApplicationContext());
 		/*
 		
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity
     private void recycleView ()
     {
 
-        userList = new ArrayList<>();
+        projectList = new ArrayList<>();
         swipeRefreshLayout = findViewById(R.id.SwipeRefreshLayout);
         swipeRefreshLayout.setColorScheme(android.R.color.holo_blue_light);
         swipeRefreshLayout.setOnRefreshListener(refreshListener);
@@ -192,8 +192,8 @@ public class MainActivity extends AppCompatActivity
 
 		try
         {
-			userList = new ArrayList<>();
-			User user;
+			projectList = new ArrayList<>();
+			ProjectInfo user;
 			File dir = new File(path);
 			if (!dir.exists() || dir.isFile()) return;
 
@@ -205,11 +205,11 @@ public class MainActivity extends AppCompatActivity
 			{
 				if (pu.isAndroidProject(file.getAbsolutePath()))
                 {
-					user = new User(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("/") + 1), file.getAbsolutePath(), "");
-					userList.add(user);
+					user = new ProjectInfo(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("/") + 1), file.getAbsolutePath(), "");
+					projectList.add(user);
 				}
 			}
-			recyclerviewAdapter.setUserList(userList);
+			recyclerviewAdapter.setProjectList(projectList);
 		}
         catch (Exception e)
         {

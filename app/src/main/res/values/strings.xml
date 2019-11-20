@@ -26,4 +26,7 @@
     <string name="ui_editor_toolbar_undo">Undo</string>
     <string name="ui_editor_toolbar_redo">Redo</string>
     <string name="ui_editor_toolbar_save">Save</string>
+	<string name="delete_project">Delete Project</string>
+	<string name="backup">Backup...</string>
+	<string name="file_explorer">Project Explorer</string>
 </resources>

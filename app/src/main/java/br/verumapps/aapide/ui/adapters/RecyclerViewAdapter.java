@@ -9,48 +9,49 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import br.verumapps.aapide.R;
-import br.verumapps.aapide.manager.User;
+import br.verumapps.aapide.manager.ProjectInfo;
 import java.util.List;
+import br.verumapps.aapide.ui.*;
+import android.widget.Toast;
 
-
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder>
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ProjectListVH>
 {
 
-    private List<User> userList;
+    private List<ProjectInfo> projectList;
 
-    public void setUserList (List<User> userList)
+    public void setProjectList (List<ProjectInfo> projectList)
     {
-        this.userList = userList;
+        this.projectList = projectList;
         notifyDataSetChanged();
     }
 
     //private final OnClickListener mOnClickListener = new MyOnClickListener();
 
     @Override
-    public RecyclerViewAdapter.MyViewHolder onCreateViewHolder (ViewGroup parent, int viewType)
+    public RecyclerViewAdapter.ProjectListVH onCreateViewHolder (ViewGroup parent, int viewType)
     {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_project, parent, false);
-        return new MyViewHolder(view);
+        return new ProjectListVH(view);
     }
 
     @Override
-    public void onBindViewHolder (RecyclerViewAdapter.MyViewHolder holder, int position)
+    public void onBindViewHolder (RecyclerViewAdapter.ProjectListVH holder, int position)
     {
-        holder.tvTitle.setText(userList.get(position).getTitle());
-        holder.tvDesc.setText(userList.get(position).getDesc());
+        holder.tvTitle.setText(projectList.get(position).getTitle());
+        holder.tvDesc.setText(projectList.get(position).getDesc());
     }
 
     @Override
     public int getItemCount ()
     {
-        if (userList != null)
+        if (projectList != null)
         {
-            return userList.size();
+            return projectList.size();
         }
         return 0;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    public class ProjectListVH extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener
     {
 
         private TextView tvTitle;
@@ -58,7 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         private ImageView icon;
         private LinearLayout body;
 
-        public MyViewHolder (View itemView)
+        public ProjectListVH (View itemView)
         {
             super(itemView);
 
@@ -67,15 +68,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             icon = itemView.findViewById(R.id.icon);
             body = itemView.findViewById(R.id.body);
             itemView.setOnClickListener(this);
+			itemView.setOnLongClickListener(this);
         }
         @Override
         public void onClick (View v)
         {
-            Intent intent = new Intent();
-			intent.setClass(v.getContext(), br.verumapps.aapide.ui.FileExplorer.class);
-			intent.putExtra("path", userList.get(getAdapterPosition()).getDesc());
-			v.getContext().startActivity(intent);
 
+			Intent i = new Intent();
+			i.setClass(v.getContext(), FileExplorer.class);
+			i.putExtra("path",projectList.get(getAdapterPosition()).getDesc());
+			v.getContext().startActivity(i);
+
+        }
+		@Override
+        public boolean onLongClick (View v)
+        {
+
+			Toast.makeText(v.getContext(),projectList.get(getAdapterPosition()).getDesc(), 0).show();
+			
+           return true;
 
         }
     }

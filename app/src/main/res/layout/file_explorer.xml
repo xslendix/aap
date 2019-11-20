@@ -20,16 +20,11 @@
             android:elevation="4dp"
             android:theme="@style/Theme.AppBarOverlay"
             app:title="@string/app_name"
-            app:subtitle="@string/ui_editor"
+            app:subtitle="@string/file_explorer"
             app:popupTheme="@style/Theme.PopupOverlay"/>
 
     </com.google.android.material.appbar.AppBarLayout>
-	<ListView
-		android:id="@+id/list"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:padding="8dp"
-		android:choiceMode="none"/>
+	
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 	

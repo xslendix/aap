@@ -1,9 +1,15 @@
 package br.verumapps.utils;
 
+import android.content.Context;
+import br.verumapps.aapide.R;
 import java.io.File;
 
 public class PathUtil
 {
+	Context ctx;
+	public PathUtil(Context ctx){
+		this.ctx = ctx;
+	}
     public String defaultPath = "/.AAProjects/";
 
     public  boolean isAndroidProject (String path)
