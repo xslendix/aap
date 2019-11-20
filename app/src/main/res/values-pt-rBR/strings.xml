@@ -22,5 +22,6 @@
     <string name="settings">Configurações</string>
     <string name="replace">Substituir com...</string>
     <string name="search">Procurar...</string>
+    <string name="ui_editor_preview_placeholder">Nenhum View adicionado ainda.\nClique aqui para adicionar View e Widgets...</string>
 
 </resources>
